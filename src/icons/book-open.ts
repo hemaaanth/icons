@@ -1,0 +1,22 @@
+import { defineIcon } from "../core/define";
+import type { IconDefinition } from "../core/types";
+
+export default defineIcon({
+  "exportName": "BookOpen",
+  "slug": "book-open",
+  "name": "Book open — pages hinge open",
+  "concept": "A real path morph, not a transform: the valley where the leaves meet deepens, the outer edges swing out, and the spine starts lower and shortens — exactly as a spine sinks into the valley when a book is pressed flatter. The morph amplitude lives in the path data (a shape change has no single scalar), so only its duration is a knob.",
+  "body": "<path class=\"mi-book-open-spine\" d=\"M12 7v14\"></path><path class=\"mi-book-open-cover\" d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\"></path>",
+  "css": "@media (prefers-reduced-motion: no-preference) {\n  .mi-book-open .mi-book-open-cover {\n    d: path(\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\");\n  }\n  .mi-book-open .mi-book-open-spine {\n    d: path(\"M12 7v14\");\n  }\n  .mi-book-open .mi-book-open-cover,\n  .mi-book-open .mi-book-open-spine {\n    transition: d calc(var(--mi-book-open-dur, 320ms) * var(--mi-time, 1))\n      var(--mi-ease-spring, ease-out);\n  }\n  @media (hover: hover) {\n    :where(button:not(:disabled), [role=\"button\"]:not([aria-disabled=\"true\"]), [role=\"menuitem\"]:not([aria-disabled=\"true\"]), [role=\"tab\"]:not([aria-disabled=\"true\"]), [role=\"option\"]:not([aria-disabled=\"true\"]), a:not([aria-disabled=\"true\"]), summary:not([aria-disabled=\"true\"]), label:not([aria-disabled=\"true\"]), .mi-trigger:not([aria-disabled=\"true\"])):where(:hover) .mi-book-open .mi-book-open-cover {\n      d: path(\"M2.2 18.4a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h5.5a4.3 7.3 0 0 1 4.3 7.3 4.3 7.3 0 0 1 4.3-7.3h5.5a1 1 0 0 1 1 1v13.9a1 1 0 0 1-1 1h-6.5a3.3 3.4 0 0 0-3.3 3.4 3.3 3.4 0 0 0-3.3-3.4z\");\n    }\n    :where(button:not(:disabled), [role=\"button\"]:not([aria-disabled=\"true\"]), [role=\"menuitem\"]:not([aria-disabled=\"true\"]), [role=\"tab\"]:not([aria-disabled=\"true\"]), [role=\"option\"]:not([aria-disabled=\"true\"]), a:not([aria-disabled=\"true\"]), summary:not([aria-disabled=\"true\"]), label:not([aria-disabled=\"true\"]), .mi-trigger:not([aria-disabled=\"true\"])):where(:hover) .mi-book-open .mi-book-open-spine {\n      d: path(\"M12 9.8v12\");\n    }\n  }\n  :where(button:not(:disabled), [role=\"button\"]:not([aria-disabled=\"true\"]), [role=\"menuitem\"]:not([aria-disabled=\"true\"]), [role=\"tab\"]:not([aria-disabled=\"true\"]), [role=\"option\"]:not([aria-disabled=\"true\"]), a:not([aria-disabled=\"true\"]), summary:not([aria-disabled=\"true\"]), label:not([aria-disabled=\"true\"]), .mi-trigger:not([aria-disabled=\"true\"])):where(:focus-visible) .mi-book-open .mi-book-open-cover,\n  .mi-play .mi-book-open .mi-book-open-cover {\n    d: path(\"M2.2 18.4a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h5.5a4.3 7.3 0 0 1 4.3 7.3 4.3 7.3 0 0 1 4.3-7.3h5.5a1 1 0 0 1 1 1v13.9a1 1 0 0 1-1 1h-6.5a3.3 3.4 0 0 0-3.3 3.4 3.3 3.4 0 0 0-3.3-3.4z\");\n  }\n  :where(button:not(:disabled), [role=\"button\"]:not([aria-disabled=\"true\"]), [role=\"menuitem\"]:not([aria-disabled=\"true\"]), [role=\"tab\"]:not([aria-disabled=\"true\"]), [role=\"option\"]:not([aria-disabled=\"true\"]), a:not([aria-disabled=\"true\"]), summary:not([aria-disabled=\"true\"]), label:not([aria-disabled=\"true\"]), .mi-trigger:not([aria-disabled=\"true\"])):where(:focus-visible) .mi-book-open .mi-book-open-spine,\n  .mi-play .mi-book-open .mi-book-open-spine {\n    d: path(\"M12 9.8v12\");\n  }\n}",
+  "knobs": [
+    {
+      "cssVar": "--mi-book-open-dur",
+      "label": "Duration",
+      "min": 120,
+      "max": 700,
+      "step": 20,
+      "unit": "ms",
+      "default": 320
+    }
+  ]
+} as IconDefinition);

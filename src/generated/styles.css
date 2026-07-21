@@ -1,0 +1,397 @@
+/* Framework-neutral motion trigger. Import once in the consuming app. */
+:root {
+  --mi-time: 1;
+  --mi-ease: cubic-bezier(0.32, 0.72, 0.24, 1);
+  --mi-ease-spring: linear(0, 0.032 2%, 0.12 4%, 0.31 7%, 0.56 10.5%, 0.76 13.5%, 0.9 16.5%, 0.988 19.5%, 1.042 22.5%, 1.07 26%, 1.078 30%, 1.062 36%, 1.03 44%, 1.008 52%, 0.997 62%, 0.998 74%, 1);
+  --mi-ease-pop: linear(0, 0.04 2%, 0.15 4.5%, 0.4 8%, 0.68 11.5%, 0.9 14.5%, 1.06 17.5%, 1.15 21%, 1.185 25%, 1.17 29.5%, 1.11 35.5%, 1.04 42%, 0.985 49%, 0.962 55.5%, 0.965 62%, 0.985 70%, 1.002 82%, 1);
+  --mi-ease-bounce: linear(0, 0.2 5%, 0.65 11%, 1.05 17%, 1.35 22%, 1.52 26%, 1.55 29%, 1.44 34%, 1.2 41%, 1 48%, 0.88 55%, 0.86 59%, 0.92 66%, 1 74%, 1.04 81%, 1.01 90%, 1);
+}
+
+@media (hover: hover) {
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):hover .mi {
+    --mi-progress: 1;
+  }
+}
+
+:where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):focus-visible .mi {
+  --mi-progress: 1;
+}
+
+:where(button, [role="button"], [role="menuitem"], [role="tab"], [role="option"], a, summary, label, .mi-trigger):not(:hover):not(:focus-visible) .mi,
+:where(button:disabled, [aria-disabled="true"]) .mi {
+  --mi-progress: 0;
+}
+
+.mi-play .mi,
+.mi.mi-play { --mi-progress: 1; }
+.mi { overflow: visible; }
+
+
+/* Archive — lid opens */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-archive .mi-archive-lid {
+    transform: translateY(calc(var(--mi-progress, 0) * var(--mi-archive-lift, -1.5px)));
+    transition: transform calc(var(--mi-archive-dur, 240ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Book open — pages hinge open */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-book-open .mi-book-open-cover {
+    d: path("M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z");
+  }
+  .mi-book-open .mi-book-open-spine {
+    d: path("M12 7v14");
+  }
+  .mi-book-open .mi-book-open-cover,
+  .mi-book-open .mi-book-open-spine {
+    transition: d calc(var(--mi-book-open-dur, 320ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  @media (hover: hover) {
+    :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:hover) .mi-book-open .mi-book-open-cover {
+      d: path("M2.2 18.4a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h5.5a4.3 7.3 0 0 1 4.3 7.3 4.3 7.3 0 0 1 4.3-7.3h5.5a1 1 0 0 1 1 1v13.9a1 1 0 0 1-1 1h-6.5a3.3 3.4 0 0 0-3.3 3.4 3.3 3.4 0 0 0-3.3-3.4z");
+    }
+    :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:hover) .mi-book-open .mi-book-open-spine {
+      d: path("M12 9.8v12");
+    }
+  }
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:focus-visible) .mi-book-open .mi-book-open-cover,
+  .mi-play .mi-book-open .mi-book-open-cover {
+    d: path("M2.2 18.4a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h5.5a4.3 7.3 0 0 1 4.3 7.3 4.3 7.3 0 0 1 4.3-7.3h5.5a1 1 0 0 1 1 1v13.9a1 1 0 0 1-1 1h-6.5a3.3 3.4 0 0 0-3.3 3.4 3.3 3.4 0 0 0-3.3-3.4z");
+  }
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:focus-visible) .mi-book-open .mi-book-open-spine,
+  .mi-play .mi-book-open .mi-book-open-spine {
+    d: path("M12 9.8v12");
+  }
+}
+
+/* Bot — antenna perks up */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-bot .mi-bot-antenna {
+    transform-box: fill-box;
+    transform-origin: 100% 100%;
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-bot-perk, 10deg)));
+    transition: transform calc(var(--mi-bot-dur, 260ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Check — tick redraws */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-check .mi-check-tick {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 0;
+  }
+  /* One-shot draw-on. The 100% frame equals the always-on base state
+     (dashoffset 0), so the keyframe hands off invisibly — drawn-in and
+     rest are the same pose. */
+  @keyframes mi-check-draw {
+    0% {
+      stroke-dashoffset: -24;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @media (hover: hover) {
+    :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:hover) .mi-check .mi-check-tick {
+      animation: mi-check-draw calc(var(--mi-check-dur, 300ms) * var(--mi-time, 1))
+        cubmi-bezier(0.45, 0.1, 0.9, 0.4) 1;
+    }
+  }
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:focus-visible) .mi-check .mi-check-tick {
+    animation: mi-check-draw calc(var(--mi-check-dur, 300ms) * var(--mi-time, 1))
+      ease-out 1;
+  }
+}
+
+/* Chevron down — nudges down */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-chevron-down .mi-chevron-down-mark {
+    transform: translateY(calc(var(--mi-progress, 0) * var(--mi-chevron-down-nudge, 2px)));
+    transition: transform calc(var(--mi-chevron-down-dur, 280ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Chevron right — nudges right */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-chevron-right .mi-chevron-right-mark {
+    transform: translateX(calc(var(--mi-progress, 0) * var(--mi-chevron-right-nudge, 2px)));
+    transition: transform calc(var(--mi-chevron-right-dur, 280ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Copy — the copy slides out */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-copy .mi-copy-back {
+    transform: translate(
+      calc(var(--mi-progress, 0) * var(--mi-copy-out, 2.35px) * -1),
+      calc(var(--mi-progress, 0) * var(--mi-copy-out, 2.35px))
+    );
+    transition: transform calc(var(--mi-copy-dur, 300ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Download — the payload drops in */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-download .mi-download-arrow {
+    transform: translateY(calc(var(--mi-progress, 0) * var(--mi-download-drop, 1.75px)));
+    transition: transform calc(var(--mi-download-dur, 300ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* External link — the arrow departs */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-external-link .mi-external-link-arrow {
+    transform: translate(
+      calc(var(--mi-progress, 0) * var(--mi-external-link-depart, 1.2px)),
+      calc(var(--mi-progress, 0) * var(--mi-external-link-depart, 1.2px) * -1)
+    );
+    transition: transform calc(var(--mi-external-link-dur, 300ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* File text — lines riffle */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-file-text-l1,
+  .mi-file-text-l2,
+  .mi-file-text-l3 {
+    transform: translateX(calc(var(--mi-progress, 0) * var(--mi-file-text-nudge, 1px)));
+    transition: transform calc(var(--mi-file-text-dur, 260ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  .mi-file-text-l2 {
+    transition-delay: calc(var(--mi-file-text-stagger, 45ms) * var(--mi-time, 1));
+  }
+  .mi-file-text-l3 {
+    transition-delay: calc(var(--mi-file-text-stagger, 45ms) * 2 * var(--mi-time, 1));
+  }
+}
+
+/* Link — halves link up */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-link2 .mi-link2-left {
+    transform: translateX(calc(var(--mi-progress, 0) * var(--mi-link2-converge, 0.7px)));
+    transition: transform calc(var(--mi-link2-dur, 280ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  .mi-link2 .mi-link2-right {
+    transform: translateX(calc(var(--mi-progress, 0) * var(--mi-link2-converge, 0.7px) * -1));
+    transition: transform calc(var(--mi-link2-dur, 280ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Link — chain cinches */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-link .mi-link-upper {
+    transform: translate(
+      calc(var(--mi-progress, 0) * var(--mi-link-cinch, 0.45px) * -1),
+      calc(var(--mi-progress, 0) * var(--mi-link-cinch, 0.45px))
+    );
+    transition: transform calc(var(--mi-link-dur, 260ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  .mi-link .mi-link-lower {
+    transform: translate(
+      calc(var(--mi-progress, 0) * var(--mi-link-cinch, 0.45px)),
+      calc(var(--mi-progress, 0) * var(--mi-link-cinch, 0.45px) * -1)
+    );
+    transition: transform calc(var(--mi-link-dur, 260ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Message — sends */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-message-square .mi-message-square-bubble {
+    d: path("M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z");
+    transition: d calc(var(--mi-message-square-dur, 300ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  @media (hover: hover) {
+    :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:hover) .mi-message-square .mi-message-square-bubble {
+      d: path("M22 15a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 4.202A.71.71 0 0 1 2 21.286V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z");
+    }
+  }
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:focus-visible) .mi-message-square .mi-message-square-bubble,
+  .mi-play .mi-message-square .mi-message-square-bubble {
+    d: path("M22 15a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 4.202A.71.71 0 0 1 2 21.286V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z");
+  }
+}
+
+/* Pen — dips into writing angle */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-pen .mi-pen-body {
+    transform-box: view-box;
+    transform-origin: 2.5px 21.5px;
+    transform: translateY(calc(var(--mi-progress, 0) * var(--mi-pen-press, 0.75px)))
+      rotate(calc(var(--mi-progress, 0) * var(--mi-pen-tilt, 12deg)));
+    transition: transform calc(var(--mi-pen-dur, 320ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Plus — reaches for more */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-plus .mi-plus-h {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    transform: scaleX(calc(1 + var(--mi-progress, 0) * (var(--mi-plus-reach, 1.18) - 1)));
+    transition: transform calc(var(--mi-plus-dur, 280ms) * var(--mi-time, 1))
+      var(--mi-ease-bounce, ease-out);
+  }
+  .mi-plus .mi-plus-v {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    transform: scaleY(calc(1 + var(--mi-progress, 0) * (var(--mi-plus-reach, 1.18) - 1)));
+    transition: transform calc(var(--mi-plus-dur, 280ms) * var(--mi-time, 1))
+      var(--mi-ease-bounce, ease-out);
+  }
+}
+
+/* Refresh — winds back, ready to spin */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-refresh-cw .mi-refresh-cw-glyph {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-refresh-cw-windup, -14deg)));
+    transition: transform calc(var(--mi-refresh-cw-dur, 260ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Rotate back — winds back, ready to spin */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-rotate-ccw .mi-rotate-ccw-glyph {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-rotate-ccw-windup, 14deg)));
+    transition: transform calc(var(--mi-rotate-ccw-dur, 260ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Search — glass scans, then holds */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-search .mi-search-glass {
+    transform-box: view-box;
+    transform-origin: 11px 11px;
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-search-tilt, -17deg)))
+      scale(calc(1 + var(--mi-progress, 0) * (var(--mi-search-zoom, 1.08) - 1)));
+    transition: transform calc(var(--mi-search-dur, 420ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  /* One-shot scan. The 100% frame equals the base hover pose exactly, so the
+     keyframe hands off invisibly and hover-out is a plain reverse transition. */
+  @keyframes mi-search-scan {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    38% {
+      transform: rotate(calc(var(--mi-search-tilt, -17deg) * 1.35))
+        scale(calc(1 + (var(--mi-search-zoom, 1.08) - 1) * 1.3));
+    }
+    64% {
+      transform: rotate(calc(var(--mi-search-tilt, -17deg) * 0.5))
+        scale(var(--mi-search-zoom, 1.08));
+    }
+    100% {
+      transform: rotate(var(--mi-search-tilt, -17deg))
+        scale(var(--mi-search-zoom, 1.08));
+    }
+  }
+  @media (hover: hover) {
+    :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:hover) .mi-search .mi-search-glass {
+      animation: mi-search-scan calc(var(--mi-search-dur, 420ms) * var(--mi-time, 1))
+        ease-in-out 1;
+    }
+  }
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="menuitem"]:not([aria-disabled="true"]), [role="tab"]:not([aria-disabled="true"]), [role="option"]:not([aria-disabled="true"]), a:not([aria-disabled="true"]), summary:not([aria-disabled="true"]), label:not([aria-disabled="true"]), .mi-trigger:not([aria-disabled="true"])):where(:focus-visible) .mi-search .mi-search-glass {
+    animation: mi-search-scan calc(var(--mi-search-dur, 420ms) * var(--mi-time, 1))
+      ease-in-out 1;
+  }
+}
+
+/* Settings — gear turns */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-settings .mi-settings-gear {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-settings-turn, 45deg)));
+    transition: transform calc(var(--mi-settings-dur, 400ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* Share — the network grows */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-share2 .mi-share2-top,
+  .mi-share2 .mi-share2-bottom {
+    transform-box: view-box;
+    transform-origin: 6px 12px;
+    transition: transform calc(var(--mi-share2-dur, 320ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  .mi-share2 .mi-share2-top {
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-share2-spread, -12deg)));
+  }
+  .mi-share2 .mi-share2-bottom {
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-share2-spread, -12deg) * -1));
+  }
+  .mi-share2 .mi-share2-new {
+    opacity: var(--mi-progress, 0);
+    transition: opacity calc(var(--mi-share2-dur, 320ms) * var(--mi-time, 1))
+      var(--mi-ease, ease-out);
+  }
+  .mi-share2 .mi-share2-reach {
+    transform-box: view-box;
+    transform-origin: 9px 12px;
+    transform: scaleX(var(--mi-progress, 0));
+    transition: transform calc(var(--mi-share2-dur, 320ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  .mi-share2 .mi-share2-node {
+    transform-box: view-box;
+    transform-origin: 18px 12px;
+    transform: scale(var(--mi-progress, 0));
+    transition: transform calc(var(--mi-share2-dur, 320ms) * var(--mi-time, 1))
+      var(--mi-ease-pop, ease-out);
+    transition-delay: calc(var(--mi-share2-delay, 80ms) * var(--mi-time, 1));
+  }
+}
+
+/* Trash — lid opens */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-trash2 .mi-trash2-lid {
+    transform-box: fill-box;
+    transform-origin: 100% 100%;
+    transform: translateY(calc(var(--mi-progress, 0) * var(--mi-trash2-lift, -4px)))
+      rotate(calc(var(--mi-progress, 0) * var(--mi-trash2-tilt, 18deg)));
+    transition: transform calc(var(--mi-trash2-dur, 340ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+  .mi-trash2 .mi-trash2-body {
+    transform: translateY(calc(var(--mi-progress, 0) * var(--mi-trash2-settle, 1.5px)));
+    transition: transform calc(var(--mi-trash2-dur, 340ms) * var(--mi-time, 1))
+      var(--mi-ease-spring, ease-out);
+  }
+}
+
+/* X — draws in */
+@media (prefers-reduced-motion: no-preference) {
+  .mi-x .mi-x-glyph {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    transform: scale(calc(1 - var(--mi-progress, 0) * (1 - var(--mi-x-draw, 0.81))));
+    transition: transform calc(var(--mi-x-dur, 260ms) * var(--mi-time, 1))
+      var(--mi-ease-bounce, ease-out);
+  }
+}

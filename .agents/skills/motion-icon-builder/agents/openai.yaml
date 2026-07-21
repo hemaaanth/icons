@@ -1,0 +1,4 @@
+interface:
+  display_name: "Motion Icon Builder"
+  short_description: "Design and finalize meaningful animated icons"
+  default_prompt: "Use $motion-icon-builder to create and refine one animated icon."

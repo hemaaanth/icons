@@ -1,0 +1,99 @@
+# Icons
+
+Meaningful microanimated icons for React, Vue, Svelte, and vanilla JavaScript.
+Every icon starts from Lucide geometry, stays pixel-identical at rest, and moves
+only to explain its action: a lid opens, a copy slides out, a chain cinches.
+
+[Browse the icons and open the builder](https://hemaaanth.github.io/icons/)
+
+## Install
+
+Until the package is published to npm, install it directly from GitHub:
+
+```bash
+npm install github:hemaaanth/icons#v0.1.0
+```
+
+Import the framework-neutral trigger styles once:
+
+```ts
+import "@hemaaanth/icons/styles.css";
+```
+
+### React
+
+```tsx
+import { Copy } from "@hemaaanth/icons/react";
+
+<button aria-label="Copy"><Copy size={16} /></button>
+```
+
+The package root also defaults to the React adapter.
+
+### Vue
+
+```vue
+<script setup>
+import { Copy } from "@hemaaanth/icons/vue";
+</script>
+
+<template><button aria-label="Copy"><Copy :size="16" /></button></template>
+```
+
+### Svelte
+
+```svelte
+<script>
+  import { Copy } from "@hemaaanth/icons/svelte";
+</script>
+
+<button aria-label="Copy"><Copy size={16} /></button>
+```
+
+### Vanilla JavaScript
+
+```js
+import { copyDefinition, createIcon } from "@hemaaanth/icons/vanilla";
+
+document.querySelector("button").append(createIcon(copyDefinition, { size: 16 }));
+```
+
+Icons animate from the nearest interactive ancestor on pointer hover or
+`:focus-visible`. Add `.mi-trigger` to a custom interactive wrapper, or
+`.mi-play` to force the active pose. Disabled controls and reduced-motion users
+stay static.
+
+## Build one icon
+
+```bash
+npm install
+npm run icon:new -- bell
+npm run dev
+```
+
+The scaffold creates three motion directions in `drafts/bell.mjs`. The builder
+shows those options and embeds DialKit for live tuning, persistent versions, and
+copyable settings. After feedback selects a direction:
+
+```bash
+npm run icon:finalize -- bell b
+```
+
+Finalization validates the choice, moves it into the canonical catalog,
+regenerates every framework adapter, runs tests, and stages the result.
+
+Agents should follow
+[motion-icon-builder/SKILL.md](.agents/skills/motion-icon-builder/SKILL.md).
+
+## Development
+
+```bash
+npm run dev       # gallery + builder
+npm run check     # types, lint, tests, package, and site
+```
+
+The source of truth is `src/icons/*.ts`. Everything in `src/generated/` and
+`src/svelte/generated/` is produced by `npm run generate`.
+
+Resting geometry is derived from Lucide under the ISC License. See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
