@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { icons } from "./index";
+import { botDefinition, icons } from "./index";
 
 describe("icon catalog", () => {
   it("contains unique framework-neutral definitions", () => {
@@ -22,5 +22,11 @@ describe("icon catalog", () => {
         expect(icon.css, `${icon.slug}:${knob.cssVar}`).toContain(`${knob.cssVar}, ${knob.default}${knob.unit}`);
       }
     }
+  });
+
+  it("gives the bot a legible wake-up motion", () => {
+    expect(botDefinition.body).toContain("mi-bot-eyes");
+    expect(botDefinition.css).toContain("--mi-bot-perk, 18deg");
+    expect(botDefinition.css).toContain("--mi-bot-awake, 1.45");
   });
 });

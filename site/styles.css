@@ -104,21 +104,11 @@ button:focus-visible, a:focus-visible {
   background: var(--surface-hover);
 }
 
-.icon-card > .mi {
-  transition: opacity 120ms ease, transform 120ms ease;
-}
-
-.icon-card:hover > .mi, .icon-card:focus-within > .mi {
-  opacity: 0.16;
-  transform: scale(0.92);
-}
-
 .icon-actions {
   position: absolute;
-  inset: 0;
+  top: 0.5rem;
+  right: 0.5rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 0.375rem;
   opacity: 0;
   pointer-events: none;
@@ -152,11 +142,7 @@ button:focus-visible, a:focus-visible {
 }
 
 @media (hover: none) {
-  .icon-card > .mi { transform: translateY(-0.75rem); }
   .icon-actions {
-    top: auto;
-    bottom: 0.5rem;
-    height: 2rem;
     opacity: 1;
     pointer-events: auto;
     transform: none;

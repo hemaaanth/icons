@@ -25,4 +25,4 @@
 
 ## User Directives
 1. **[2026-07-21] Keep the public gallery extremely quiet**
-   Do instead: follow the hem.so layout language, honor only the system theme, omit icon descriptions and labels, and reveal copy actions on hover or focus.
+   Do instead: follow the hem.so layout language, honor only the system theme, omit icon descriptions and labels, and reveal copy actions without obscuring or muting the animated preview.

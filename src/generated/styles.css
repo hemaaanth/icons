@@ -67,14 +67,21 @@
   }
 }
 
-/* Bot — antenna perks up */
+/* Bot — wakes and listens */
 @media (prefers-reduced-motion: no-preference) {
   .mi-bot .mi-bot-antenna {
     transform-box: fill-box;
     transform-origin: 100% 100%;
-    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-bot-perk, 10deg)));
-    transition: transform calc(var(--mi-bot-dur, 260ms) * var(--mi-time, 1))
+    transform: rotate(calc(var(--mi-progress, 0) * var(--mi-bot-perk, 18deg)));
+    transition: transform calc(var(--mi-bot-dur, 280ms) * var(--mi-time, 1))
       var(--mi-ease-spring, ease-out);
+  }
+  .mi-bot .mi-bot-eyes {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scaleY(calc(1 + var(--mi-progress, 0) * (var(--mi-bot-awake, 1.45) - 1)));
+    transition: transform calc(var(--mi-bot-dur, 280ms) * var(--mi-time, 1))
+      var(--mi-ease-pop, ease-out);
   }
 }
 

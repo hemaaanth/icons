@@ -11,7 +11,7 @@ only to explain its action: a lid opens, a copy slides out, a chain cinches.
 Until the package is published to npm, install it directly from GitHub:
 
 ```bash
-npm install https://github.com/hemaaanth/icons/releases/download/v0.1.1/hemaaanth-icons-0.1.1.tgz
+npm install https://github.com/hemaaanth/icons/releases/download/v0.1.2/hemaaanth-icons-0.1.2.tgz
 ```
 
 Or copy a standalone React icon from the gallery with the shadcn CLI:

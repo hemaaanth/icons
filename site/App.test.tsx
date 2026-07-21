@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { icons } from "../src/core";
@@ -14,5 +15,13 @@ describe("public gallery", () => {
     expect(markup).not.toContain("Theme");
     expect(markup).not.toContain("class=\"icon-name\"");
     expect(markup).not.toContain("class=\"icon-concept\"");
+  });
+
+  it("keeps the glyph visible while hover actions are shown", async () => {
+    const css = await readFile(new URL("./styles.css", import.meta.url), "utf8");
+
+    expect(css).not.toContain("opacity: 0.16");
+    expect(css).toContain("top: 0.5rem");
+    expect(css).toContain("right: 0.5rem");
   });
 });
