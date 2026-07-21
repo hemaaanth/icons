@@ -4,7 +4,7 @@ Meaningful microanimated icons for React, Vue, Svelte, and vanilla JavaScript.
 Every icon starts from Lucide geometry, stays pixel-identical at rest, and moves
 only to explain its action: a lid opens, a copy slides out, a chain cinches.
 
-[Browse the icons and open the builder](https://hemaaanth.github.io/icons/)
+[Browse the icons](https://hemaaanth.github.io/icons/)
 
 ## Install
 
@@ -12,6 +12,12 @@ Until the package is published to npm, install it directly from GitHub:
 
 ```bash
 npm install https://github.com/hemaaanth/icons/releases/download/v0.1.1/hemaaanth-icons-0.1.1.tgz
+```
+
+Or copy a standalone React icon from the gallery with the shadcn CLI:
+
+```bash
+npx shadcn@latest add "https://hemaaanth.github.io/icons/r/copy.json"
 ```
 
 Import the framework-neutral trigger styles once:
@@ -68,7 +74,7 @@ stay static.
 ```bash
 npm install
 npm run icon:new -- bell
-npm run dev
+npm run dev:builder
 ```
 
 The scaffold creates three motion directions in `drafts/bell.mjs`. The builder
@@ -84,12 +90,16 @@ regenerates every framework adapter, runs tests, and stages the result.
 
 Agents should follow
 [motion-icon-builder/SKILL.md](.agents/skills/motion-icon-builder/SKILL.md).
+The repository also ships an always-on
+[napkin skill](.agents/skills/napkin/SKILL.md) so agents read and curate the
+shared `.Codex/napkin.md` runbook before working.
 
 ## Development
 
 ```bash
-npm run dev       # gallery + builder
-npm run check     # types, lint, tests, package, and site
+npm run dev           # public gallery
+npm run dev:builder   # local-only DialKit authoring surface
+npm run check         # types, lint, tests, package, and site
 ```
 
 The source of truth is `src/icons/*.ts`. Everything in `src/generated/` and

@@ -43,6 +43,7 @@
   },
   "scripts": {
     "dev": "npm run generate && vite",
+    "dev:builder": "npm run generate && vite --open /icons/builder.html",
     "generate": "tsx scripts/generate.ts",
     "build:lib": "npm run generate && tsup && node scripts/copy-static.mjs",
     "build:site": "npm run generate && vite build",

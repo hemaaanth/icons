@@ -1,0 +1,271 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "hemaaanth-icons",
+  "homepage": "https://hemaaanth.github.io/icons/",
+  "items": [
+    {
+      "name": "archive",
+      "type": "registry:ui",
+      "title": "Archive",
+      "description": "A meaningful microanimated Archive icon.",
+      "files": [
+        {
+          "path": "registry/icons/archive.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "book-open",
+      "type": "registry:ui",
+      "title": "BookOpen",
+      "description": "A meaningful microanimated Book open icon.",
+      "files": [
+        {
+          "path": "registry/icons/book-open.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "bot",
+      "type": "registry:ui",
+      "title": "Bot",
+      "description": "A meaningful microanimated Bot icon.",
+      "files": [
+        {
+          "path": "registry/icons/bot.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "check",
+      "type": "registry:ui",
+      "title": "Check",
+      "description": "A meaningful microanimated Check icon.",
+      "files": [
+        {
+          "path": "registry/icons/check.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chevron-down",
+      "type": "registry:ui",
+      "title": "ChevronDown",
+      "description": "A meaningful microanimated Chevron down icon.",
+      "files": [
+        {
+          "path": "registry/icons/chevron-down.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chevron-right",
+      "type": "registry:ui",
+      "title": "ChevronRight",
+      "description": "A meaningful microanimated Chevron right icon.",
+      "files": [
+        {
+          "path": "registry/icons/chevron-right.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "copy",
+      "type": "registry:ui",
+      "title": "Copy",
+      "description": "A meaningful microanimated Copy icon.",
+      "files": [
+        {
+          "path": "registry/icons/copy.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "download",
+      "type": "registry:ui",
+      "title": "Download",
+      "description": "A meaningful microanimated Download icon.",
+      "files": [
+        {
+          "path": "registry/icons/download.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "external-link",
+      "type": "registry:ui",
+      "title": "ExternalLink",
+      "description": "A meaningful microanimated External link icon.",
+      "files": [
+        {
+          "path": "registry/icons/external-link.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "file-text",
+      "type": "registry:ui",
+      "title": "FileText",
+      "description": "A meaningful microanimated File text icon.",
+      "files": [
+        {
+          "path": "registry/icons/file-text.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "link2",
+      "type": "registry:ui",
+      "title": "Link2",
+      "description": "A meaningful microanimated Link icon.",
+      "files": [
+        {
+          "path": "registry/icons/link2.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "link",
+      "type": "registry:ui",
+      "title": "Link",
+      "description": "A meaningful microanimated Link icon.",
+      "files": [
+        {
+          "path": "registry/icons/link.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "message-square",
+      "type": "registry:ui",
+      "title": "MessageSquare",
+      "description": "A meaningful microanimated Message icon.",
+      "files": [
+        {
+          "path": "registry/icons/message-square.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pen",
+      "type": "registry:ui",
+      "title": "Pen",
+      "description": "A meaningful microanimated Pen icon.",
+      "files": [
+        {
+          "path": "registry/icons/pen.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "plus",
+      "type": "registry:ui",
+      "title": "Plus",
+      "description": "A meaningful microanimated Plus icon.",
+      "files": [
+        {
+          "path": "registry/icons/plus.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "refresh-cw",
+      "type": "registry:ui",
+      "title": "RefreshCw",
+      "description": "A meaningful microanimated Refresh icon.",
+      "files": [
+        {
+          "path": "registry/icons/refresh-cw.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "rotate-ccw",
+      "type": "registry:ui",
+      "title": "RotateCcw",
+      "description": "A meaningful microanimated Rotate back icon.",
+      "files": [
+        {
+          "path": "registry/icons/rotate-ccw.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "search",
+      "type": "registry:ui",
+      "title": "Search",
+      "description": "A meaningful microanimated Search icon.",
+      "files": [
+        {
+          "path": "registry/icons/search.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "settings",
+      "type": "registry:ui",
+      "title": "Settings",
+      "description": "A meaningful microanimated Settings icon.",
+      "files": [
+        {
+          "path": "registry/icons/settings.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "share2",
+      "type": "registry:ui",
+      "title": "Share2",
+      "description": "A meaningful microanimated Share icon.",
+      "files": [
+        {
+          "path": "registry/icons/share2.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "trash2",
+      "type": "registry:ui",
+      "title": "Trash2",
+      "description": "A meaningful microanimated Trash icon.",
+      "files": [
+        {
+          "path": "registry/icons/trash2.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "x",
+      "type": "registry:ui",
+      "title": "X",
+      "description": "A meaningful microanimated X icon.",
+      "files": [
+        {
+          "path": "registry/icons/x.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

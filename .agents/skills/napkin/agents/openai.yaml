@@ -1,0 +1,4 @@
+interface:
+  display_name: "Napkin"
+  short_description: "Curate the repository working runbook"
+  default_prompt: "Use $napkin to read and curate the repository runbook before working."

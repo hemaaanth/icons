@@ -17,7 +17,7 @@ geometry canonical and make motion communicate the control's action.
 3. Create three genuinely distinct motion directions. Give each option one
    physical idea and a plain-language concept. Avoid three parameter variants
    of the same idea.
-4. Run `npm run dev`. Present the three options in the Builder and ask the user
+4. Run `npm run dev:builder`. Present the three options in the Builder and ask the user
    which direction is strongest and what feels wrong. Do not finalize yet.
 5. Apply feedback to the chosen option. Use the embedded DialKit panel to tune
    every amplitude and duration, save versions, compare rapidly, and copy the
@@ -59,7 +59,8 @@ geometry canonical and make motion communicate the control's action.
 
 - `drafts/*.mjs`: unshipped options under human review.
 - `src/icons/*.ts`: finalized canonical definitions.
-- `site/`: public gallery and reusable DialKit builder.
+- `site/App.tsx`: minimal public gallery; never expose authoring controls here.
+- `builder.html` and `site/BuilderApp.tsx`: local-only reusable DialKit builder.
 - `scripts/new-icon.mjs`: scaffold three options from Lucide geometry.
 - `scripts/finalize-icon.mjs`: validate, promote, generate, test, and stage.
 - `src/generated/`, `src/svelte/generated/`: generated adapters and styles.
