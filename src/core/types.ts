@@ -38,6 +38,14 @@ export interface IconDraft {
   exportName: string;
   slug: string;
   name: string;
+  brief: string;
+  references: Array<{
+    name: string;
+    keep: string;
+    reject: string;
+    doNotCopy: string;
+  }>;
+  geometryStrategy: string;
   body: string;
   candidates: DraftCandidate[];
 }

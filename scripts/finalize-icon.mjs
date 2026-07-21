@@ -13,7 +13,26 @@ await access(draftPath);
 const draft = (await import(`${pathToFileURL(draftPath).href}?t=${Date.now()}`)).default;
 const candidate = draft.candidates.find((item) => item.id === candidateId);
 if (!candidate) throw new Error(`Unknown candidate ${candidateId}; choose ${draft.candidates.map((item) => item.id).join(", ")}`);
-if (/TODO/.test(candidate.concept + candidate.css)) throw new Error("Resolve every TODO before finalizing the icon");
+if (!Array.isArray(draft.references) || draft.references.length < 3) {
+  throw new Error("Document at least three independent references before finalizing the icon");
+}
+const reviewRecord = JSON.stringify({
+  brief: draft.brief,
+  references: draft.references,
+  geometryStrategy: draft.geometryStrategy,
+  body: draft.body,
+  concept: candidate.concept,
+  css: candidate.css,
+});
+if (/TODO/.test(reviewRecord)) throw new Error("Resolve every research, geometry, concept, and implementation TODO before finalizing the icon");
+if (candidate.knobs.some((knob) => knob.unit === "ms")) throw new Error("Duration is fixed at 300ms and cannot be a knob");
+const millisecondValues = [...candidate.css.matchAll(/(?<![\w-])(\d+)ms\b/g)].map((match) => Number(match[1]));
+if (millisecondValues.length === 0 || millisecondValues.some((value) => value !== 300)) {
+  throw new Error("Every animation must use the fixed 300ms choreography budget");
+}
+if (/\b(?:transition|animation)-delay\s*:/.test(candidate.css)) {
+  throw new Error("Delayed motion can exceed the fixed 300ms choreography budget");
+}
 
 const definition = {
   exportName: draft.exportName,
