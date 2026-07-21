@@ -8,6 +8,16 @@ description: Design, compare, tune, refine, and finalize one meaningful microani
 Build one icon through an explicit human review loop. Keep the resting Lucide
 geometry canonical and make motion communicate the control's action.
 
+## Session contract
+
+- Load this skill at the start of every agent session in this repository.
+- If the user has not already named one specific icon task, ask exactly:
+  "What do you want to do today: add a new icon or improve an existing icon?"
+- Select exactly one icon for the worktree and agent session. The full loop for
+  that icon may span design, implementation, review, tuning, and finalization.
+- Do not start, edit, review, or finalize a second icon in the same worktree or
+  session. Ask the user to open a new Paseo worktree/session instead.
+
 ## Workflow
 
 1. Inspect the existing catalog and choose the matching Lucide slug. Do not
