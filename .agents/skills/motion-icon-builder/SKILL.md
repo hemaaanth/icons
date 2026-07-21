@@ -18,6 +18,16 @@ Design Critique methods as thinking and tuning tools, never as substitutes for
 icon-specific judgment or as permission to add decorative motion. Do not copy
 Interface Craft into this repository.
 
+## Session contract
+
+- Load this skill at the start of every agent session in this repository.
+- If the user has not already named one specific icon task, ask exactly:
+  "What do you want to do today: add a new icon or improve an existing icon?"
+- Select exactly one icon for the worktree and agent session. The full loop for
+  that icon may span design, implementation, review, tuning, and finalization.
+- Do not start, edit, review, or finalize a second icon in the same worktree or
+  session. Ask the user to open a new Paseo worktree/session instead.
+
 ## Workflow
 
 1. Write a one-sentence brief: what the static mark denotes, what action or

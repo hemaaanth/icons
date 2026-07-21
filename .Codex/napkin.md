@@ -33,5 +33,8 @@
    Do instead: keep GitHub Pages gallery-only and expose the DialKit builder solely through the local `builder.html` development entry.
 
 ## User Directives
-1. **[2026-07-21] Keep the public gallery extremely quiet**
+1. **[2026-07-21] Keep each Paseo worktree focused on one icon**
+   Do instead: load the motion icon skill at session start, ask whether to add or improve one icon when no specific task is supplied, and move any second icon to a new worktree/session.
+
+2. **[2026-07-21] Keep the public gallery extremely quiet**
    Do instead: follow the hem.so layout language, honor only the system theme, omit icon descriptions and labels, and reveal copy actions without obscuring or muting the animated preview.
