@@ -1,0 +1,20 @@
+{
+  "worktree": {
+    "setup": "npm install --no-audit --no-fund --prefer-offline",
+    "terminals": [
+      {
+        "name": "Icon Builder",
+        "command": "npm run dev:builder -- --port $PASEO_WORKTREE_PORT"
+      }
+    ]
+  },
+  "scripts": {
+    "builder": {
+      "type": "service",
+      "command": "npm run dev:builder -- --port $PASEO_PORT"
+    },
+    "check": {
+      "command": "npm run check"
+    }
+  }
+}
