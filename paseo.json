@@ -1,0 +1,20 @@
+{
+  "worktree": {
+    "setup": "npm ci --no-audit --no-fund",
+    "terminals": [
+      {
+        "name": "Icon Builder",
+        "command": "npm run dev:builder -- --host 0.0.0.0 --port $PASEO_WORKTREE_PORT"
+      }
+    ]
+  },
+  "scripts": {
+    "builder": {
+      "type": "service",
+      "command": "npm run dev:builder -- --host $HOST --port $PASEO_PORT"
+    },
+    "check": {
+      "command": "npm run check"
+    }
+  }
+}

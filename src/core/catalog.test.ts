@@ -24,6 +24,16 @@ describe("icon catalog", () => {
     }
   });
 
+  it("uses one fixed 300ms choreography budget", () => {
+    for (const icon of icons) {
+      const millisecondValues = [...icon.css.matchAll(/(?<![\w-])(\d+)ms\b/g)].map((match) => Number(match[1]));
+      expect(millisecondValues.length, icon.slug).toBeGreaterThan(0);
+      expect(millisecondValues.every((value) => value === 300), icon.slug).toBe(true);
+      expect(icon.knobs.some((knob) => knob.unit === "ms"), icon.slug).toBe(false);
+      expect(icon.css, icon.slug).not.toMatch(/\b(?:transition|animation)-delay\s*:/);
+    }
+  });
+
   it("gives the bot a legible wake-up motion", () => {
     expect(botDefinition.body).toContain("mi-bot-eyes");
     expect(botDefinition.css).toContain("--mi-bot-perk, 18deg");
