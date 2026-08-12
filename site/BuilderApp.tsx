@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { DialRoot, useDialKit } from "dialkit";
 import { createReactIcon } from "../src/react/create-icon";
 import { icons } from "../src/core";
@@ -160,19 +160,18 @@ function DraftWorkbench({ draft }: { draft: IconDraft }) {
                 const itemDefinition = fromDraft(draft, item);
                 const selected = item.id === candidate.id;
                 return (
-                  <div
+                  <button
+                    type="button"
                     key={item.id}
                     className={selected ? "option-card active" : "option-card"}
-                    role="button"
-                    tabIndex={0}
                     aria-pressed={selected}
+                    aria-label={`Use ${item.label} as the main preview`}
                     onClick={() => setCandidateId(item.id)}
-                    onKeyDown={(event) => activateOnKeyboard(event, () => setCandidateId(item.id))}
                   >
                     <ShadowIconPreview definition={itemDefinition} size={48} />
                     <span>{item.label}</span>
                     <small>{item.concept}</small>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -200,7 +199,7 @@ function IconTuner({
     const motion = Object.fromEntries(definition.knobs.map((knob) => [knobKey(knob), [knob.default, knob.min, knob.max, knob.step]]));
     return {
       preview: {
-        size: [96, 16, 160, 1],
+        size: [definition.slug === "share2" ? 160 : 96, 16, 160, 1],
         holdPose: false,
         slowMotion: false,
       },
@@ -267,12 +266,6 @@ function fromDraft(draft: IconDraft, candidate: DraftCandidate): IconDefinition 
 
 function knobKey(knob: IconKnob): string {
   return knob.cssVar.replace(/^--mi-/, "").replaceAll("-", "_");
-}
-
-function activateOnKeyboard(event: KeyboardEvent, action: () => void) {
-  if (event.key !== "Enter" && event.key !== " ") return;
-  event.preventDefault();
-  action();
 }
 
 export function newIconPrompt(): string {

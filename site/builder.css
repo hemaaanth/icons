@@ -142,7 +142,7 @@ select { min-width: 10rem; padding: 0.5rem 0.625rem; border: 1px solid var(--bor
 .option-placeholder span { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px dashed var(--border-strong); border-radius: 50%; font-size: 0.6875rem; }
 .option-placeholder-flex { grid-column: 1 / -1; align-content: center; gap: 0.75rem; }
 .option-placeholder-flex p { margin: 0; font-size: 0.6875rem; }
-.option-card { display: grid; grid-template-rows: 5.75rem auto auto; padding: 0.7rem; color: var(--text); cursor: pointer; }
+.option-card { display: grid; grid-template-rows: 5.75rem auto auto; padding: 0.7rem; color: var(--text); text-align: left; cursor: pointer; }
 .option-card:hover { border-color: var(--border-strong); background: var(--surface-raised); }
 .option-card.active { border-color: var(--text); }
 .option-card > span { margin-top: 0.5rem; font-size: 0.75rem; font-weight: 650; }
