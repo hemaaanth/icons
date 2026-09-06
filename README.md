@@ -36,6 +36,10 @@ import { Copy } from "@hemaaanth/icons/react";
 
 The package root also defaults to the React adapter.
 
+For Next.js, import `@hemaaanth/icons/styles.css` once in `app/layout.tsx`, then use the named React imports above from a client component.
+
+The three-state Access icon is currently a standalone draft. See [Access in Next.js](drafts/access-nextjs.md) for the copyable component and controlled-dropdown example; it is not included in the released package yet.
+
 ### Vue
 
 ```vue

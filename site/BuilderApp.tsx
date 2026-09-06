@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type ComponentType } from "react";
 import { DialRoot, useDialKit } from "dialkit";
 import { createReactIcon } from "../src/react/create-icon";
 import { icons } from "../src/core";
 import type { DraftCandidate, IconDefinition, IconDraft, IconKnob } from "../src/core";
 
-type DraftModule = { default: IconDraft };
+type DraftModule = { default: IconDraft; Workbench?: ComponentType };
 
 const draftModules = import.meta.glob<DraftModule>("../drafts/*.mjs", { eager: true });
 const drafts = Object.values(draftModules).map((module) => module.default);
@@ -17,6 +17,7 @@ function Builder() {
   const [draftSlug, setDraftSlug] = useState(drafts[0]?.slug ?? "");
   const [copyStatus, setCopyStatus] = useState("Copy an instruction from the icon rail to begin.");
   const activeDraft = drafts.find((draft) => draft.slug === draftSlug) ?? drafts[0] ?? null;
+  const CustomWorkbench = Object.values(draftModules).find((module) => module.default === activeDraft)?.Workbench;
 
   async function copyInstruction(prompt: string, confirmation: string) {
     await copyText(prompt);
@@ -54,7 +55,7 @@ function Builder() {
         </header>
 
         {activeDraft ? (
-          <DraftWorkbench key={activeDraft.slug} draft={activeDraft} />
+          CustomWorkbench ? <CustomWorkbench key={activeDraft.slug} /> : <DraftWorkbench key={activeDraft.slug} draft={activeDraft} />
         ) : (
           <EmptyWorkbench />
         )}
