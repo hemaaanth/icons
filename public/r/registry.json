@@ -19,7 +19,7 @@
       "name": "book-open",
       "type": "registry:ui",
       "title": "BookOpen",
-      "description": "A meaningful microanimated Book open icon.",
+      "description": "A meaningful microanimated Book Open icon.",
       "files": [
         {
           "path": "registry/icons/book-open.tsx",
