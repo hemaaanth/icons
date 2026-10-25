@@ -149,6 +149,10 @@ select { min-width: 10rem; padding: 0.5rem 0.625rem; border: 1px solid var(--bor
 .option-card small { margin-top: 0.25rem; color: var(--muted); font-size: 0.65rem; line-height: 1.4; }
 .shadow-preview { width: 100%; height: 5.75rem; }
 
+.filmstrip { display: grid; grid-template-columns: 3rem repeat(5, minmax(0, 1fr)); gap: 0.25rem; color: var(--text); }
+.filmstrip-label { align-self: center; color: var(--faint); font-size: 0.625rem; font-variant-numeric: tabular-nums; text-align: center; }
+.filmstrip-cell { display: grid; height: 3.25rem; place-items: center; border: 1px solid var(--border); border-radius: 0.4rem; background: var(--surface); }
+
 .new-icon-button {
   display: flex;
   width: calc(100% - 1.5rem);

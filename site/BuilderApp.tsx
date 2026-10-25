@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { DialRoot, useDialKit } from "dialkit";
 import { createReactIcon } from "../src/react/create-icon";
 import { icons } from "../src/core";
@@ -145,11 +145,13 @@ function DraftWorkbench({ draft }: { draft: IconDraft }) {
             <button
               className={preview.holdPose ? "preview-button mi-play" : "preview-button"}
               aria-label={`Preview ${definition.name}`}
+              data-candidate={candidate.id}
             >
               <preview.Component size={preview.size} />
             </button>
             <div className="preview-hints"><span>Hover</span><span>Focus</span><span>Interrupt</span></div>
           </div>
+          <Filmstrip key={definition.css + JSON.stringify(preview.style)} Component={preview.Component} candidateId={candidate.id} style={preview.style} />
           <section className="options-section" aria-label="Motion directions">
             <div className="section-heading">
               <p className="eyebrow">Options</p>
@@ -166,6 +168,7 @@ function DraftWorkbench({ draft }: { draft: IconDraft }) {
                     role="button"
                     tabIndex={0}
                     aria-pressed={selected}
+                    data-candidate={item.id}
                     onClick={() => setCandidateId(item.id)}
                     onKeyDown={(event) => activateOnKeyboard(event, () => setCandidateId(item.id))}
                   >
@@ -218,6 +221,73 @@ function IconTuner({
   } as CSSProperties;
 
   return children({ Component, size: values.preview.size, holdPose: values.preview.holdPose, style });
+}
+
+// Frozen frames make motion feedback pinnable: a Pinpoint pin on a cell names one moment at one size.
+const FILM_FRAMES = [0, 75, 150, 225, 300];
+const FILM_SIZES = [13, 16, 20, 24, 32];
+
+function Filmstrip({
+  Component,
+  candidateId,
+  style,
+}: {
+  Component: ReturnType<typeof createReactIcon>;
+  candidateId: string;
+  style: CSSProperties;
+}) {
+  return (
+    <section className="options-section" aria-label="Frames">
+      <div className="section-heading">
+        <p className="eyebrow">Frames</p>
+        <span>Frozen at ms × px · pin a cell to comment on that moment</span>
+      </div>
+      <div className="filmstrip" style={{ ...style, "--mi-time": 1 } as CSSProperties}>
+        <span />
+        {FILM_SIZES.map((size) => <span key={size} className="filmstrip-label">{size}px</span>)}
+        {FILM_FRAMES.map((frame) => (
+          <Fragment key={frame}>
+            <span className="filmstrip-label">{frame}ms</span>
+            {FILM_SIZES.map((size) => (
+              <FrozenFrame key={size} frame={frame} size={size} candidateId={candidateId} Component={Component} />
+            ))}
+          </Fragment>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FrozenFrame({
+  frame,
+  size,
+  candidateId,
+  Component,
+}: {
+  frame: number;
+  size: number;
+  candidateId: string;
+  Component: ReturnType<typeof createReactIcon>;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const cell = ref.current;
+    if (!cell || frame === 0) return;
+    // Wait one frame: Chromium starts no transition on an element first styled in the same flush.
+    const request = requestAnimationFrame(() => {
+      cell.classList.add("mi-play");
+      for (const animation of cell.getAnimations({ subtree: true })) {
+        animation.pause();
+        animation.currentTime = frame;
+      }
+    });
+    return () => cancelAnimationFrame(request);
+  }, [frame]);
+  return (
+    <span ref={ref} className="filmstrip-cell" data-candidate={candidateId} data-frame={frame} data-size={size} title={`${frame}ms at ${size}px`}>
+      <Component size={size} />
+    </span>
+  );
 }
 
 function CatalogIconButton({ definition, onCopy }: { definition: IconDefinition; onCopy: () => void }) {
@@ -281,7 +351,7 @@ export function newIconPrompt(): string {
     "Ask me for the static meaning, animated action or state, and UI context before drawing.",
     "Then follow the full blank-canvas workflow: build a 3–5 source reference matrix, run the adversarial subagent review, establish optically balanced original geometry, and create up to three genuinely distinct working options in the Builder.",
     "Do not use Lucide as the default skeleton, do not pad weak directions, keep the full choreography at exactly 300ms, and do not finalize until I explicitly lock a direction.",
-    "Open /icons/builder.html in the Paseo browser and keep the center preview, option row, and DialKit controls updated as you work.",
+    "Run the builder in a bb terminal, open /icons/builder.html in the bb browser panel, keep the center preview, option row, frames, and DialKit controls updated as you work, and take my feedback as Pinpoint pins.",
   ].join(" ");
 }
 
@@ -291,7 +361,7 @@ export function refineIconPrompt(icon: IconDefinition): string {
     "Treat its current geometry and motion as one reference, not as canon.",
     "First explain what is strong, weak, generic, derivative, or optically unresolved; then build a 3–5 source reference matrix and run the adversarial subagent review before drawing.",
     "Work in a draft with up to three genuinely distinct options, preserve only what earns its place, keep the complete choreography at exactly 300ms, and do not edit the canonical icon or finalize until I explicitly lock a direction.",
-    "Open /icons/builder.html in the Paseo browser and keep the center preview, option row, and DialKit controls updated as you work.",
+    "Run the builder in a bb terminal, open /icons/builder.html in the bb browser panel, keep the center preview, option row, frames, and DialKit controls updated as you work, and take my feedback as Pinpoint pins.",
   ].join(" ");
 }
 

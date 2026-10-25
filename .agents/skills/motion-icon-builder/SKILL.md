@@ -12,11 +12,12 @@ ones.
 
 Before drawing or editing an icon, read
 [references/motion-spec.md](references/motion-spec.md) and
-[references/quality-bar.md](references/quality-bar.md). Also load the locally
-installed Interface Craft skill. Use its Storyboard Animation, DialKit, and
+[references/quality-bar.md](references/quality-bar.md). If the Interface Craft
+skill is installed, load it and use its Storyboard Animation, DialKit, and
 Design Critique methods as thinking and tuning tools, never as substitutes for
-icon-specific judgment or as permission to add decorative motion. Do not copy
-Interface Craft into this repository.
+icon-specific judgment or as permission to add decorative motion. If it is not
+installed, say so once and apply the storyboard and critique passes described
+below by hand. Do not copy Interface Craft into this repository.
 
 ## Session contract
 
@@ -26,7 +27,8 @@ Interface Craft into this repository.
 - Select exactly one icon for the worktree and agent session. The full loop for
   that icon may span design, implementation, review, tuning, and finalization.
 - Do not start, edit, review, or finalize a second icon in the same worktree or
-  session. Ask the user to open a new Paseo worktree/session instead.
+  session. Ask the user to open a new bb thread (with its own worktree)
+  instead.
 
 ## Workflow
 
@@ -38,10 +40,12 @@ Interface Craft into this repository.
    action, typography/signage, or relevant motion. For each reference record
    what works, what fails, and what must not be copied. Lucide may be one
    reference; it is never the required skeleton or the default answer.
-3. Spawn an adversarial design-review subagent before drawing. Give it the
+3. Spawn an adversarial design-review agent before drawing. In bb, spawn it as
+   a visible child thread (`bb thread spawn --parent-self`), not a hidden
+   in-process subagent, and wait for it with `bb thread wait`. Give it the
    brief and reference matrix, but ask it to critique rather than generate. It
    must identify clichés, misleading metaphors, single-source resemblance, and
-   the synthesis opportunity. If subagents are unavailable, perform the same
+   the synthesis opportunity. If no second agent is available, perform the same
    review as a separate named pass and disclose that limitation.
 4. Choose and explain a geometry strategy: original construction, a synthesis
    of multiple principles, or a justified adaptation. Begin on a blank 24×24
@@ -64,21 +68,30 @@ Interface Craft into this repository.
    `REVISE`, or `KILL` with evidence for the static form, originality, semantic
    clarity, optical balance, physical logic, restraint, and closest precedent.
    Respond point-by-point. The reviewer has veto power.
-9. Run `npm run dev:builder`, then use Paseo's browser tools to open
-   `/icons/builder.html` in a new tab for the current workspace. Keep that tab
-   open and refresh it as the draft changes. Present only candidates that
-   passed. Ask the user which direction is strongest and what feels wrong; do
-   not finalize yet. If browser tools are unavailable in the active session,
-   say so once and give the exact local URL instead of silently skipping it.
-10. Apply feedback in the chosen draft. Use Interface Craft's storyboard method
+9. Start the builder in a bb terminal so it outlives your shell:
+   `bb terminal create --thread "$BB_THREAD_ID" --title "Icon Builder" -- npm run dev:builder`.
+   Read the URL from `bb terminal output`; Vite binds `127.0.0.1` and picks
+   the next free port. Open `<url>/icons/builder.html` in the bb browser panel
+   (`bb browser instances`, then `bb browser create --url <url> --reveal`)
+   and keep that tab open; Vite reloads it as the draft changes. Present only
+   candidates that passed. Ask the user which direction is strongest and what
+   feels wrong; do not finalize yet. If the bb browser is unavailable, say so
+   once and give the exact local URL instead of silently skipping it.
+10. Collect feedback through Pinpoint. The user pins elements in the builder:
+    option cards (`data-candidate`), the center preview, or filmstrip frames
+    (`data-frame="<ms>"`, `data-size="<px>"`), which freeze the active option
+    at a moment and size. Fetch pins with `pinpoint_list` (or
+    `bb pinpoint list`), view their pixels with `pinpoint_show`, and resolve
+    each one with `ready`, `question`, or `reject`. Never leave a pin open.
+11. Apply feedback in the chosen draft. Use Interface Craft's storyboard method
     to keep the sequence readable, DialKit to tune amplitudes and easing, and
     Design Critique for a separate polish pass. Duration is not tunable: the
     complete choreography is exactly 300ms at `--mi-time: 1`, including delays
     and stagger.
-11. Recheck rest, peak, and settled frames; all target sizes; hover exit; rapid
-    interruption; keyboard focus; touch/play behavior; disabled state; and
-    reduced motion. Ask the user to lock the direction only after these pass.
-12. After user lock, run a second independent adversarial review. Finalize only
+12. Recheck rest, peak, and settled frames in the builder filmstrip; all
+    target sizes; hover exit; rapid interruption; keyboard focus; touch/play
+    behavior; disabled state; and reduced motion. Ask the user to lock the direction only after these pass.
+13. After user lock, run a second independent adversarial review. Finalize only
     on `PASS`; otherwise revise or abandon. Then run
     `npm run icon:finalize -- <slug> <candidate-id>`, review the generated diff,
     and run `npm run check` before committing.

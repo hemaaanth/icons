@@ -1,7 +1,6 @@
 # Repository guidance
 
-Before any work in this repository, read and follow
-`.agents/skills/napkin/SKILL.md`, then read and curate `.Codex/napkin.md`, then
+Before any work in this repository, read and curate `.Codex/napkin.md`, then
 read and follow `.agents/skills/motion-icon-builder/SKILL.md`.
 
 At the start of a new agent session, if the user has not already named one
@@ -10,8 +9,8 @@ or improve an existing icon?"
 
 Each worktree and agent session may work on exactly one icon. Once that icon is
 chosen, keep all implementation, review, and refinement scoped to it. If the
-user asks to start a second icon, stop and ask them to open a new Paseo
-worktree/session for it.
+user asks to start a second icon, stop and ask them to open a new bb thread
+(with its own worktree) for it.
 
 - Treat `src/icons/*.ts` as canonical.
 - Never hand-edit `src/generated/`, `src/svelte/generated/`, `registry/icons/`,
